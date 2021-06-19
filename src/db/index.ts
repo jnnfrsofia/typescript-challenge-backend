@@ -11,7 +11,7 @@ export async function connect() {
   db = connection.db("sample_airbnb");
 }
 
-// getDeb is the reusable db connection
+// getDb is the reusable db connection
 export function getDb() {
   const col = db.collection("listingsAndReviews");
   return col;
