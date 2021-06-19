@@ -4,7 +4,7 @@ import { getDb } from "../db";
 
 const router = express.Router();
 
-// staysReq is the params the user passes through via Postman
+// staysReq is the params the user passes through via Postman or Insomnia
 interface staysReq {
   bedrooms: string
   beds: string
