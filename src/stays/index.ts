@@ -6,11 +6,11 @@ const router = express.Router();
 
 // staysReq is the params the user passes through via Postman or Insomnia
 interface staysReq {
-  bedrooms: string
-  beds: string
-  bathrooms: string
-  amens: string
-  page: string
+  bedrooms?: string
+  beds?: string
+  bathrooms?: string
+  amenities?: string
+  page?: string
 }
 
 // staysQuery is the query we build with the user provided params
@@ -32,6 +32,8 @@ const buildQuery = (q: staysReq) => {
   beds && (query.beds = Number(beds))
   bedrooms && (query.bedrooms = Number(bedrooms))
   bathrooms && (query.bathrooms = Number(bathrooms))
+  
+  // this only seems to work with one amenity passed as a param
   amens && (query.amenities = amens.split(","))
   // grab the skip number 
   const skip = determinePageSkip(Number(page));
@@ -67,6 +69,10 @@ router.post("/", async (req: Request, res: Response) => {
   const results = await db.find(query, { limit: 25 }).skip(skip).toArray();
 
   res.json(await results);
+  
+  if (results.length == 0) {
+    console.error("No results found for your query");
+  }
 
 });
 
