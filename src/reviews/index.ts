@@ -22,6 +22,11 @@ router.get("/:id", async (req: Request, res: Response) => {
   const results = await db.findOne(q);
 
   res.json(await results);
+  
+  // alert the user if no results were found
+  if (results.length == 0) {
+    console.error("No results found for your query");
+  }
 
 });
 
