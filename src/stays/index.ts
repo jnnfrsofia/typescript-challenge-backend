@@ -33,7 +33,8 @@ const buildQuery = (q: staysReq) => {
   bedrooms && (query.bedrooms = Number(bedrooms))
   bathrooms && (query.bathrooms = Number(bathrooms))
   
-  // this only seems to work with one amenity passed as a param
+  // this only seems to work if the amentities array in the param exactly matches the amentities array in the listing;
+  // would need to rework to check if an amenity was included instead
   amens && (query.amenities = amens.split(","))
   // grab the skip number 
   const skip = determinePageSkip(Number(page));
